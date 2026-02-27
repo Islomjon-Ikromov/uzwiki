@@ -1,0 +1,27 @@
+# Environment & secrets
+.env
+
+# MediaWiki generated config
+mediawiki/LocalSettings.php
+
+# MediaWiki runtime
+mediawiki/cache/*
+mediawiki/images/*
+!mediawiki/images/.htaccess
+
+# Local volumes data (db, images, cache, config, redis) — keep local, never push
+volumes/*
+!volumes/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker
+docker-compose.override.yml

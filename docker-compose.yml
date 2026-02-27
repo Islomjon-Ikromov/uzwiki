@@ -1,0 +1,76 @@
+services:
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - mediawiki
+    networks:
+      - wiki-net
+
+  mediawiki:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    expose:
+      - "80"
+    volumes:
+      - ./volumes/config:/config
+      - ./volumes/images:/var/www/html/images
+      - ./volumes/cache:/var/www/html/cache
+    environment:
+      - MEDIAWIKI_DB_TYPE=postgres
+      - MEDIAWIKI_DB_HOST=db
+      - MEDIAWIKI_DB_PORT=5432
+      - MEDIAWIKI_DB_NAME=${POSTGRES_DB:-uzwiki}
+      - MEDIAWIKI_DB_USER=${POSTGRES_USER:-uzwiki}
+      - MEDIAWIKI_DB_PASSWORD=${POSTGRES_PASSWORD:-uzwiki_secret}
+      - MEDIAWIKI_ADMIN_USER=${WIKI_ADMIN_USER:-Admin}
+      - MEDIAWIKI_ADMIN_PASSWORD=${WIKI_ADMIN_PASSWORD:-admin123456}
+      - MEDIAWIKI_SITE_NAME=${WIKI_SITE_NAME:-UzWiki}
+      - MEDIAWIKI_SERVER=${WIKI_SERVER:-http://localhost:8080}
+      - MEDIAWIKI_LANG=${WIKI_LANG:-uz}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - wiki-net
+
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-uzwiki}
+      POSTGRES_USER: ${POSTGRES_USER:-uzwiki}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-uzwiki_secret}
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-uzwiki} -d ${POSTGRES_DB:-uzwiki}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - wiki-net
+
+  redis:
+    image: redis:7-alpine
+    restart: always
+    volumes:
+      - ./volumes/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - wiki-net
+
+networks:
+  wiki-net:
