@@ -49,7 +49,7 @@ $wgEnableUploads = true;
 $wgLogos = [ '1x' => "$wgResourceBasePath/resources/assets/mediawiki.png" ];
 
 # Short URLs
-$wgArticlePath = "/wiki/$1";
+$wgArticlePath = "/articles/$1";
 $wgUsePathInfo = true;
 
 # Extensions for Wikipedia content
