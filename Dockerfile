@@ -36,7 +36,8 @@ RewriteRule ^/?wiki(/.*)?$ %{DOCUMENT_ROOT}/index.php [L]\n\
 RewriteRule ^/?$ %{DOCUMENT_ROOT}/index.php [L]' > /var/www/html/.htaccess
 
 # Set proper permissions
-RUN chown -R www-data:www-data /var/www/html/images \
+RUN mkdir -p /var/www/html/images /var/www/html/cache \
+    && chown -R www-data:www-data /var/www/html/images \
     && chown -R www-data:www-data /var/www/html/cache
 
 ENTRYPOINT ["/entrypoint.sh"]
