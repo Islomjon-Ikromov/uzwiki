@@ -60,6 +60,8 @@ wfLoadExtension( 'ParserFunctions' );
 $wgPFEnableStringFunctions = true;
 wfLoadExtension( 'Cite' );
 wfLoadExtension( 'TemplateData' );
+wfLoadExtension( 'VisualEditor' );
+wfLoadExtension( 'Gadgets' );
 
 # Use system Lua binary (ARM64 compatible)
 $wgScribuntoEngineConf['luastandalone']['luaPath'] = '/usr/bin/lua5.1';
