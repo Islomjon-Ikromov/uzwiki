@@ -32,7 +32,7 @@ RUN chmod +x /entrypoint.sh
 
 # Short URL rewrite rules
 RUN echo 'RewriteEngine On\n\
-RewriteRule ^/?wiki(/.*)?$ %{DOCUMENT_ROOT}/index.php [L]\n\
+RewriteRule ^/?articles(/.*)?$ %{DOCUMENT_ROOT}/index.php [L]\n\
 RewriteRule ^/?$ %{DOCUMENT_ROOT}/index.php [L]' > /var/www/html/.htaccess
 
 # Set proper permissions
