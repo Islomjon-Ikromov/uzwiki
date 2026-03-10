@@ -10,6 +10,11 @@ if [ -f "$CONFIG_BACKUP" ] && [ ! -f "$SETTINGS_FILE" ]; then
     cp "$CONFIG_BACKUP" "$SETTINGS_FILE"
 fi
 
+# Ensure ArticlePath is always up to date
+if [ -f "$SETTINGS_FILE" ]; then
+    sed -i 's|/articles/\$1|/ziyo/\$1|g' "$SETTINGS_FILE"
+fi
+
 # First-time install
 if [ ! -f "$SETTINGS_FILE" ]; then
     echo "=== First run: installing MediaWiki ==="
@@ -105,7 +110,7 @@ $wgLogos = [ '1x' => "$wgResourceBasePath/resources/assets/mediawiki.png" ];
 # Short URLs
 #######################################################################
 
-$wgArticlePath = "/articles/$1";
+$wgArticlePath = "/ziyo/$1";
 $wgUsePathInfo = true;
 
 #######################################################################
@@ -137,9 +142,10 @@ $wgVectorUseSimpleSearch = true;
 $wgVectorUseIconWatch = true;
 $wgVectorResponsive = true;
 
-# Hide "Ziyosferadan olingan" tagline
+# Hide "Ziyosferadan olingan" tagline and main page title
 $wgHooks['BeforePageDisplay'][] = function ( $out ) {
     $out->addInlineStyle('#siteSub { display: none !important; }');
+    $out->addInlineStyle('body.page-Bosh_sahifa .mw-page-title-main, body.page-Bosh_sahifa .firstHeading { display: none !important; }');
 };
 
 #######################################################################

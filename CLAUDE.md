@@ -77,7 +77,7 @@ python3 import_article.py "Article Title"
 ## Conventions
 
 - Language: Uzbek (`uz`), timezone: `Asia/Tashkent`
-- Short URLs: `/articles/$1` pattern
+- Short URLs: `/ziyo/$1` pattern
 - CAPTCHA: QuestyCaptcha with Uzbekistan-related questions
 - License: CC-BY-SA 4.0
 - File uploads: enabled, 100MB max
