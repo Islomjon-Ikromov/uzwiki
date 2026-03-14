@@ -1,0 +1,53 @@
+User-agent: *
+
+# Allow main article pages
+Allow: /ziyo/
+
+# Block technical namespaces (Uzbek names)
+Disallow: /ziyo/Modul:
+Disallow: /ziyo/Andoza:
+Disallow: /ziyo/Maxsus:
+Disallow: /ziyo/Munozara:
+Disallow: /ziyo/Foydalanuvchi:
+Disallow: /ziyo/Foydalanuvchi_munozarasi:
+Disallow: /ziyo/Fayl:
+Disallow: /ziyo/Fayl_munozarasi:
+Disallow: /ziyo/MediaWiki:
+Disallow: /ziyo/MediaWiki_munozarasi:
+Disallow: /ziyo/Turkum:
+Disallow: /ziyo/Turkum_munozarasi:
+Disallow: /ziyo/Yordam:
+Disallow: /ziyo/Yordam_munozarasi:
+Disallow: /ziyo/Loyiha:
+Disallow: /ziyo/Loyiha_munozarasi:
+Disallow: /ziyo/Andoza_munozarasi:
+Disallow: /ziyo/Modul_munozarasi:
+
+# Block canonical English namespace names (fallback)
+Disallow: /ziyo/Module:
+Disallow: /ziyo/Template:
+Disallow: /ziyo/Special:
+Disallow: /ziyo/Talk:
+Disallow: /ziyo/User:
+Disallow: /ziyo/User_talk:
+Disallow: /ziyo/File:
+Disallow: /ziyo/File_talk:
+Disallow: /ziyo/Help:
+Disallow: /ziyo/Help_talk:
+Disallow: /ziyo/Category:
+Disallow: /ziyo/Category_talk:
+Disallow: /ziyo/MediaWiki_talk:
+Disallow: /ziyo/Template_talk:
+Disallow: /ziyo/Module_talk:
+Disallow: /ziyo/Project:
+Disallow: /ziyo/Project_talk:
+
+# Block direct PHP access and internal paths
+Disallow: /index.php
+Disallow: /api.php
+Disallow: /load.php
+Disallow: /rest.php
+Disallow: /w/
+
+# Sitemap
+Sitemap: https://ziyosfera.uz/sitemap/sitemap-index-uzwiki.xml

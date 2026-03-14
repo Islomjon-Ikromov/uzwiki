@@ -389,4 +389,21 @@ fi
 mkdir -p /var/www/html/cache/l10n
 chown -R www-data:www-data /var/www/html/cache
 
+# Ensure sitemap directory exists
+mkdir -p /var/www/html/sitemap
+chown -R www-data:www-data /var/www/html/sitemap
+
+# Generate sitemap (main namespace only) in background
+(
+    sleep 30  # wait for Apache to start
+    php maintenance/run.php generateSitemap \
+        --memory-limit=150M \
+        --fspath=/var/www/html/sitemap \
+        --urlpath=/sitemap/ \
+        --server=https://ziyosfera.uz \
+        --compress=no \
+        --namespaces=0 \
+        --identifier=uzwiki 2>&1 || true
+) &
+
 exec apache2-foreground
